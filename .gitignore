@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# next.js / build artifacts
+.next/
+out/
+build/
+coverage/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# env files (contain secrets)
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.pem
