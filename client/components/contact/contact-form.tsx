@@ -4,7 +4,7 @@ import Container from "../global/container"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
-import { Textarea } from "../ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
 import { UploadIcon } from "@/components/global/inline-icons"
 
 const ContactForm = () => {
