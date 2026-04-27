@@ -55,8 +55,6 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [upgradeSuccess, setUpgradeSuccess] = useState(false);
   const [timeRange, setTimeRange] = useState("90d");
-  const [demoSeeding, setDemoSeeding] = useState(false);
-  const [demoSeedError, setDemoSeedError] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -136,8 +134,6 @@ export default function DashboardPage() {
   });
 
   const limits = data.limits[data.user.plan];
-  const shouldOfferDemoData =
-    data.stats.repoCount === 0 || data.stats.repoName === "No repository connected";
 
   const usageCards = [
     {
@@ -186,40 +182,6 @@ export default function DashboardPage() {
             {upgradeSuccess && (
               <div className="mt-3 rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary">
                 Upgrade successful. Your Pro plan is now active.
-              </div>
-            )}
-            {shouldOfferDemoData && (
-              <div className="mt-3 flex flex-wrap items-center gap-3 rounded-md border bg-card px-3 py-2">
-                <div className="text-sm text-muted-foreground">
-                  Your dashboard is empty. Want to seed demo data to preview a filled dashboard?
-                </div>
-                <button
-                  className="ml-auto inline-flex items-center justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground disabled:opacity-50"
-                  disabled={demoSeeding}
-                  onClick={async () => {
-                    try {
-                      setDemoSeedError(null);
-                      setDemoSeeding(true);
-                      const res = await fetch("/api/demo/seed", { method: "POST" });
-                      const json = await res.json().catch(() => ({}));
-                      if (!res.ok) {
-                        throw new Error(json.error || `Seed failed (${res.status})`);
-                      }
-                      window.location.reload();
-                    } catch (e) {
-                      setDemoSeedError(
-                        e instanceof Error ? e.message : "Failed to seed demo data",
-                      );
-                    } finally {
-                      setDemoSeeding(false);
-                    }
-                  }}
-                >
-                  {demoSeeding ? "Seeding..." : "Seed demo data"}
-                </button>
-                {demoSeedError && (
-                  <div className="w-full text-sm text-destructive">{demoSeedError}</div>
-                )}
               </div>
             )}
           </div>
