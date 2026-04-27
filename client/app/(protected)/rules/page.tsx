@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useAuthRedirect } from "@/hooks/use-auth-redirect";
 import { useUsage } from "@/components/providers/usage-provider";
 import { RuleForm } from "./_components/rule-form";
@@ -126,14 +127,22 @@ export default function RulesPage() {
   const canAddMore = rules.length < maxRules;
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Custom Rules</h1>
-        <p className="text-muted-foreground">
-          Define rules in plain enlish. the ai will use these rules when
-          reviewing your shit
-        </p>
-      </div>
+    <>
+      <Head>
+        <title>Rules | Opal</title>
+        <meta
+          name="description"
+          content="Create and manage custom review rules for your repositories."
+        />
+      </Head>
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold">Custom Rules</h1>
+          <p className="text-muted-foreground">
+            Define rules in plain enlish. the ai will use these rules when
+            reviewing your shit
+          </p>
+        </div>
 
       <RuleForm
         newRule={newRule}
@@ -157,6 +166,7 @@ export default function RulesPage() {
         onUpdate={handleUpdate}
         onDelete={handleDelete}
       />
-    </div>
+      </div>
+    </>
   );
 }

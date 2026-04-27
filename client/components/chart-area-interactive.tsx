@@ -112,7 +112,10 @@ export function ChartAreaInteractive({
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
         >
-          <AreaChart data={chartData}>
+          <AreaChart
+            data={chartData}
+            margin={{ top: 12, right: 12, left: 0, bottom: 0 }}
+          >
             <defs>
               <linearGradient id="fillPRs" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -170,14 +173,14 @@ export function ChartAreaInteractive({
             />
             <Area
               dataKey="issues"
-              type="natural"
+              type="monotone"
               fill="url(#fillIssues)"
               stroke="var(--color-issues)"
               stackId="a"
             />
             <Area
               dataKey="pullRequests"
-              type="natural"
+              type="monotone"
               fill="url(#fillPRs)"
               stroke="var(--color-pullRequests)"
               stackId="a"

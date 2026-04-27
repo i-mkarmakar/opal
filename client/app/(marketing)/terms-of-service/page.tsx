@@ -1,5 +1,10 @@
 import Wrapper from "@/components/global/wrapper";
 
+export const metadata = {
+  title: "Terms of Service",
+  description: "Review the terms that govern use of the platform.",
+};
+
 export default function TermsOfServicePage() {
   return (
     <Wrapper className="px-6 py-24">

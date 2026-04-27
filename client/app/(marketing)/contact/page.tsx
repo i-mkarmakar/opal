@@ -2,6 +2,11 @@ import ContactForm from "@/components/contact/contact-form";
 import ContactHero from "@/components/contact/contact-hero";
 import CTA from "@/components/marketing/cta";
 
+export const metadata = {
+  title: "Contact",
+  description: "Get help with setup, billing, or GitHub integration questions.",
+};
+
 export default function ContactPage() {
   return (
     <div className="relative flex w-full flex-col pt-16">

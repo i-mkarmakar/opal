@@ -10,11 +10,11 @@ import "@liveblocks/react-ui/styles/dark/attributes.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Opal — AI code reviews for GitHub",
-    template: "%s · Opal",
+    default: "Opal",
+    template: "%s | Opal",
   },
   description:
-    "AI-powered pull request and issue reviews for GitHub teams. Custom rules, activity logs, dashboard, and collaboration.",
+    "Pull request and issue reviews for GitHub teams. Custom rules, activity logs, dashboard, and collaboration.",
 };
 
 export default function RootLayout({

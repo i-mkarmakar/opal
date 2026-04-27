@@ -26,7 +26,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 orientation="vertical"
                 className="mx-2 data-[orientation=vertical]:h-4"
               />
-              <h1 className="text-base font-medium">Opal</h1>
             </div>
             <NotificationBell />
           </div>

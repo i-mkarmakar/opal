@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Bell } from "@/components/animate-ui/icons/bell";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   useUnreadInboxNotificationsCount,
   ClientSideSuspense,
@@ -13,13 +14,22 @@ import {
 } from "@/components/ui/popover";
 import { NotificationContent } from "@/components/layout/notification-content";
 
-function NotificationBadge() {
-  const { count } = useUnreadInboxNotificationsCount();
-  if (count === 0) return null;
+function NotificationBadge({ count }: { count: number }) {
+  if (!count) return null;
   return (
     <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-medium rounded-full flex items-center justify-center">
       {count > 9 ? "9+" : count}
     </span>
+  );
+}
+
+function NotificationBellTrigger() {
+  const { count } = useUnreadInboxNotificationsCount();
+  return (
+    <button className="relative p-2 rounded-lg hover:bg-muted transition-colors cursor-pointer">
+      <Bell size={20} animateOnHover />
+      <NotificationBadge count={count} />
+    </button>
   );
 }
 
@@ -29,12 +39,19 @@ export function NotificationBell() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <button className="relative p-2 rounded-lg hover:bg-muted transition-colors cursor-pointer">
-          <Bell size={20} animateOnHover />
-          <ClientSideSuspense fallback={null}>
-            <NotificationBadge />
-          </ClientSideSuspense>
-        </button>
+        <ClientSideSuspense
+          fallback={
+            <button
+              className="relative p-2 rounded-lg"
+              disabled
+              aria-label="Loading notifications"
+            >
+              <Skeleton className="h-5 w-5 rounded-sm" />
+            </button>
+          }
+        >
+          <NotificationBellTrigger />
+        </ClientSideSuspense>
       </PopoverTrigger>
       <PopoverContent
         className="w-72 p-0"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useUser } from "@clerk/nextjs";
 import { useUsage } from "@/components/providers/usage-provider";
 import { useAuthRedirect } from "@/hooks/use-auth-redirect";
@@ -61,13 +62,21 @@ export default function SettingsPage() {
   const currentPlan = usage?.plan || "FREE";
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-muted-foreground">
-          Manage your account and subscription
-        </p>
-      </div>
+    <>
+      <Head>
+        <title>Settings | Opal</title>
+        <meta
+          name="description"
+          content="Manage your account, billing, usage limits, and GitHub connection."
+        />
+      </Head>
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold">Settings</h1>
+          <p className="text-muted-foreground">
+            Manage your account and subscription
+          </p>
+        </div>
 
       <AccountCard
         email={user?.primaryEmailAddress?.emailAddress}
@@ -95,6 +104,7 @@ export default function SettingsPage() {
       />
 
       <GithubCard repoName={repoName} indexingStatus={indexingStatus} />
-    </div>
+      </div>
+    </>
   );
 }

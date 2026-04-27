@@ -1,5 +1,10 @@
 import { SignupForm } from "@/components/signup-form";
 
+export const metadata = {
+  title: "Sign Up",
+  description: "Create an account to start reviewing pull requests and issues.",
+};
+
 export default function SignUpPage() {
   return (
     <div className="flex min-h-svh w-full flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">

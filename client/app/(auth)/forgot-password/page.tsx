@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSignIn } from "@clerk/nextjs";
@@ -117,8 +118,16 @@ export default function ForgotPasswordPage() {
   const needsNewPassword = signIn?.status === "needs_new_password";
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
-      <div className="w-full max-w-sm">
+    <>
+      <Head>
+        <title>Reset Password | Opal</title>
+        <meta
+          name="description"
+          content="Reset your password and regain access to your account."
+        />
+      </Head>
+      <div className="flex min-h-svh flex-col items-center justify-center bg-muted p-6 md:p-10 w-full">
+        <div className="w-full max-w-sm">
         <Card>
           <CardContent className="p-6">
             <FieldGroup>
@@ -202,7 +211,8 @@ export default function ForgotPasswordPage() {
             </FieldGroup>
           </CardContent>
         </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

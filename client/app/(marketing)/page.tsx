@@ -6,6 +6,12 @@ import Hero from "@/components/marketing/hero";
 import HowItWorks from "@/components/marketing/how-it-works";
 import Pricing from "@/components/marketing/pricing";
 
+export const metadata = {
+  title: "Home",
+  description:
+    "Pull request and issue reviews for GitHub teams. Custom rules, activity logs, and a dashboard for visibility.",
+};
+
 export default function MarketingHomePage() {
   return (
     <MarketingGate>

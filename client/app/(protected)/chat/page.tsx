@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Head from "next/head";
 import { Button } from "@/components/ui/button";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { useUsage } from "@/components/providers/usage-provider";
@@ -101,9 +102,17 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-48px)]">
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="max-w-3xl mx-auto space-y-4 h-full">
+    <>
+      <Head>
+        <title>Chat | Opal</title>
+        <meta
+          name="description"
+          content="Ask questions about your connected repositories and get answers with context."
+        />
+      </Head>
+      <div className="flex flex-col h-[calc(100vh-48px)]">
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="max-w-3xl mx-auto space-y-4 h-full">
           {messages.length === 0 ? (
             <ChatEmptyState
               exampleQuestions={exampleQuestions}
@@ -127,33 +136,34 @@ export default function ChatPage() {
             </div>
           )}
           <div ref={messagesEndRef} />
+          </div>
         </div>
-      </div>
 
-      <div className="p-4">
-        <div className="max-w-3xl mx-auto">
-          {!canChat ? (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
-              <p className="text-amber-800 mb-2">
-                You reached your message Limit
-              </p>
-              <Link href="/settings">
-                <Button variant="default" className={primaryCtaStyles}>
-                  Upgrade to Pro
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <PlaceholdersAndVanishInput
-              placeholders={exampleQuestions}
-              value={input}
-              onValueChange={setInput}
-              onChange={(e) => setInput(e.target.value)}
-              onSubmit={handleSubmit}
-            />
-          )}
+        <div className="p-4">
+          <div className="max-w-3xl mx-auto">
+            {!canChat ? (
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-center">
+                <p className="text-amber-800 mb-2">
+                  You reached your message Limit
+                </p>
+                <Link href="/settings">
+                  <Button variant="default" className={primaryCtaStyles}>
+                    Upgrade to Pro
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <PlaceholdersAndVanishInput
+                placeholders={exampleQuestions}
+                value={input}
+                onValueChange={setInput}
+                onChange={(e) => setInput(e.target.value)}
+                onSubmit={handleSubmit}
+              />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

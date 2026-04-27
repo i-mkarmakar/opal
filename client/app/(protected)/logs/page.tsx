@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { useAuthRedirect } from "@/hooks/use-auth-redirect";
 import { LogFilters } from "./_components/log-filters";
 import { LogTable } from "./_components/log-table";
@@ -72,36 +73,45 @@ export default function LogsPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Activity Logs</h1>
-        <p className="text-muted-foreground">
-          View all PR reviews and issue analyzes perfrormed by the bot
-        </p>
+    <>
+      <Head>
+        <title>Logs | Opal</title>
+        <meta
+          name="description"
+          content="Browse pull request reviews and issue analyses across your repositories."
+        />
+      </Head>
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold">Activity Logs</h1>
+          <p className="text-muted-foreground">
+            View all PR reviews and issue analyzes perfrormed by the bot
+          </p>
+        </div>
+
+        <LogFilters
+          typeFilter={typeFilter}
+          onTypeFilterChange={setTypeFilter}
+          repoFilter={repoFilter}
+          onRepoFilterChange={setRepoFilter}
+          repositories={repositories}
+          startDate={startDate}
+          onStartDateChange={setStartDate}
+          endDate={endDate}
+          onEndDateChange={setEndDate}
+          onClearFilters={clearFilters}
+        />
+
+        <LogTable
+          logs={logs}
+          hasActiveFilters={
+            typeFilter !== "all" ||
+            repoFilter !== "all" ||
+            !!startDate ||
+            !!endDate
+          }
+        />
       </div>
-
-      <LogFilters
-        typeFilter={typeFilter}
-        onTypeFilterChange={setTypeFilter}
-        repoFilter={repoFilter}
-        onRepoFilterChange={setRepoFilter}
-        repositories={repositories}
-        startDate={startDate}
-        onStartDateChange={setStartDate}
-        endDate={endDate}
-        onEndDateChange={setEndDate}
-        onClearFilters={clearFilters}
-      />
-
-      <LogTable
-        logs={logs}
-        hasActiveFilters={
-          typeFilter !== "all" ||
-          repoFilter !== "all" ||
-          !!startDate ||
-          !!endDate
-        } 
-      />
-    </div>
+    </>
   );
 }

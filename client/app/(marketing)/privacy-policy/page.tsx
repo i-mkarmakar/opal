@@ -1,5 +1,10 @@
 import Wrapper from "@/components/global/wrapper";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Read how we collect, use, and protect your data.",
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <Wrapper className="px-6 py-24">
